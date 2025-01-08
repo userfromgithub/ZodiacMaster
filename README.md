@@ -1,2 +1,5 @@
 # Zodiac Master
-hello
+
+
+## Introduction to this project
+Zodiac Master provides real-time horoscope through telegram.
