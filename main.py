@@ -43,6 +43,9 @@ chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument("--headless")
 
 chrome_options.add_argument("--disable-gpu")
+
+## update
+chrome_options.add_argument("--enable-unsafe-swiftshader")
 chrome_options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
 browser = webdriver.Chrome(options=chrome_options)
@@ -81,21 +84,25 @@ def fortune_crawler(zodiac_value, when_value):
             break # break the loop after browsing the website
     
     # get the date that corresponds to when_value
-    the_date = browser.find_element(By.XPATH, '/html/body/div[1]/div/main/div[2]/div[1]/div[2]/p[1]').text.split('\n')[0]
+    # the_date = browser.find_element(By.XPATH, '/html/body/div[1]/div/main/div[2]/div[1]/div[2]/p[1]').text.split('\n')[0]
+    the_date = browser.find_element(By.XPATH, '/html/body/div[1]/main/div[2]/div/div[2]/p[1]').text.split('\n')[0]
 
     # add title for the scraped fortune content
     main_fortune.append(f'✨✨✨{zodiac_value}『{when_value}』✨✨✨\n時間🗓：{the_date}')
 
     # the main fortune content of the target zodiac (the very first block of the page)
-    main_content = browser.find_element(By.XPATH, '/html/body/div[1]/div/main/div[2]/div[1]/div[2]/ul')
+    # main_content = browser.find_element(By.XPATH, '/html/body/div[1]/div/main/div[2]/div[1]/div[2]/ul')
+    main_content = browser.find_element(By.XPATH, '/html/body/div[1]/main/div[2]/div/div[2]/ul')
 
     # get each bullet point under the main fortune content
     for point in main_content.find_elements(By.TAG_NAME, 'li'):
         main_fortune.append(point.text) # add the bullet point content into main_fortune list
     
     # get the title of each type of fortune
-    luckies = browser.find_elements(By.XPATH, '/html/body/div[1]/div/main/div[2]/div[1]/div[2]/h2')[0:4]
-    
+    # luckies = browser.find_elements(By.XPATH, '/html/body/div[1]/div/main/div[2]/div[1]/div[2]/h2')[0:4]
+    luckies = browser.find_elements(By.XPATH, '/html/body/div[1]/main/div[2]/div[1]/div[2]/h2')[0:4]
+    print(luckies[0].text) # 整體運勢
+
     # to scrape and save the the content of each type of fortune
     for luck_idx, each_luck in enumerate(luckies):
         
@@ -103,8 +110,11 @@ def fortune_crawler(zodiac_value, when_value):
         lucky_contents[each_luck.text] = {}
         
         # fortune rating, represented in star sign emoji
-        for ele in browser.find_elements(By.XPATH, '/html/body/div[1]/div/main/div[2]/div[1]/div[2]/div[' + str(luck_idx+1) + ']/div'):
+        # for ele in browser.find_elements(By.XPATH, '/html/body/div[1]/div/main/div[2]/div[1]/div[2]/div[' + str(luck_idx+1) + ']/div'):
+        # for ele in browser.find_elements(By.XPATH, '/html/body/div[1]/main/div[2]/div[1]/div[2]/div[' + str(luck_idx+1) + ']/div'):
+        for ele in browser.find_elements(By.XPATH, '/html/body/div[1]/main/div[2]/div[1]/div[2]/section[' + str(luck_idx+1) + ']/div'):
 
+            # print(ele.text)
             # to scraped and save the rating
             rating = ''
             for stars in ele.find_elements(By.TAG_NAME, 'img'):
@@ -115,12 +125,19 @@ def fortune_crawler(zodiac_value, when_value):
             lucky_contents[each_luck.text]['rating'] = rating # save the rating value into matching dictionary
 
             # get all the following tags (instead of child tag) that come after the tag of each type of fortune name
-            all_luck_content = ele.find_elements(By.XPATH, '/html/body/div[1]/div/main/div[2]/div[1]/div[2]/div[' + str(luck_idx+1) + ']/following-sibling::*')
-            
+            # all_luck_content = ele.find_elements(By.XPATH, '/html/body/div[1]/div/main/div[2]/div[1]/div[2]/div[' + str(luck_idx+1) + ']/following-sibling::*')
+            # all_luck_content = ele.find_elements(By.XPATH, '/html/body/div[1]/main/div[2]/div[1]/div[2]/section[' + str(luck_idx+1) + ']/following-sibling::p[following-sibling::section]')
+            # /html/body/div[1]/main/div[2]/div[1]/div[2]/p[7]
+            all_luck_content = ele.find_elements(By.XPATH, '/html/body/div[1]/main/div[2]/div[1]/div[2]/section[' + str(luck_idx+1) + ']/following-sibling::*')
+
+            print(all_luck_content) # /html/body/div[1]/main/div[2]/div[1]/div[2]/p[5]
+            print(len(all_luck_content))
+
             # get the luck content of each type of fortune
             luck_content = ''
             for each_block in all_luck_content:
-                
+
+                print(f'each_block={each_block.tag_name}\n')
                 # there are no fixed number of following p tags
                 if each_block.tag_name == 'p':
 
@@ -129,9 +146,12 @@ def fortune_crawler(zodiac_value, when_value):
                         break # break the for-loop
                     else:
                         luck_content += each_block.text + '\n\n'
+                        print(f'luck_content={luck_content}\n')
 
                 # if the div tag first occurred means it reaches the end of the content under this fortune type
-                elif each_block.tag_name == 'div':
+                # elif each_block.tag_name == 'div':
+                #     break # break the for-loop
+                elif each_block.tag_name == 'section':
                     break # break the for-loop
                 
             # save the content to the dictionary
