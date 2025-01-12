@@ -36,3 +36,9 @@ All functions are provided in the form of buttons.
 
 ### 💰 Get the financial horoscope
 <img src="demo_imgs\financial_horoscope.jpg" width=50%/>
+
+
+## ⚠️ Issues & 🔑 Solutions
+
+
+## Reference
