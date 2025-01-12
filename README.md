@@ -4,6 +4,7 @@ Zodiac Master provides real-time horoscope through telegram.
 ## Introduction to this project
 Zodiac Master robot scrape horoscope data based on the request from users.
 There are different types of categories and options for user to choose.
+All functions are provided in the form of buttons.
 
 ## Options
 1. start - to start or restart the robot
@@ -17,3 +18,21 @@ There are different types of categories and options for user to choose.
 
 ### :calendar: When
 <img src="demo_imgs\when.jpg" width=50%/>
+
+### :date: Choose the desired time of the horoscope
+<img src="demo_imgs\when_example.jpg" width=50%/>
+
+### :dizzy: Choose the desired Zodiac Sign of the horoscope
+<img src="demo_imgs\example.jpg" width=50%/>
+
+### 📊 Get the main horoscope
+<img src="demo_imgs\main_horoscope.jpg" width=50%/>
+
+### 💘 Get the love horoscope
+<img src="demo_imgs\love_horoscope.jpg" width=50%/>
+
+### 📈 Get the career horoscope
+<img src="demo_imgs\career_horoscope.jpg" width=50%/>
+
+### 💰 Get the financial horoscope
+<img src="demo_imgs\financial_horoscope.jpg" width=50%/>
