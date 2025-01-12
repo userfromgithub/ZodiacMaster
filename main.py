@@ -4,7 +4,7 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMa
 from telegram.ext import CommandHandler, MessageHandler, Filters, CallbackContext, Updater, CallbackQueryHandler
 
 # API Token
-updater = telegram.ext.Updater(token='6596343159:AAFhdU4trzTLcwNO6JmA_LX5tHprzpM8c0Q', use_context=True)
+updater = telegram.ext.Updater(token='YOUR_TOKEN', use_context=True)
 dispatcher = updater.dispatcher
 
 
