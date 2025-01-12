@@ -11,6 +11,9 @@ There are different types of categories and options for user to choose.
 3. zodiac - including 12 zodiac signs
 4. horoscope - including 📊main/💘love/📈career/💰financial horoscope
 
-## Functions & Steps
+## 🔧 Functions & 🚶 STEPs
 ### :traffic_light: Start
 <img src="demo_imgs\start.jpg" width=50%/>
+
+### :calendar: When
+<img src="demo_imgs\when.jpg" width=50%/>
