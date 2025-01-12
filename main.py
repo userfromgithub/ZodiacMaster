@@ -101,7 +101,7 @@ def fortune_crawler(zodiac_value, when_value):
     # get the title of each type of fortune
     # luckies = browser.find_elements(By.XPATH, '/html/body/div[1]/div/main/div[2]/div[1]/div[2]/h2')[0:4]
     luckies = browser.find_elements(By.XPATH, '/html/body/div[1]/main/div[2]/div[1]/div[2]/h2')[0:4]
-    print(luckies[0].text) # 整體運勢
+    # print(luckies[0].text) # 整體運勢
 
     # to scrape and save the the content of each type of fortune
     for luck_idx, each_luck in enumerate(luckies):
@@ -130,14 +130,14 @@ def fortune_crawler(zodiac_value, when_value):
             # /html/body/div[1]/main/div[2]/div[1]/div[2]/p[7]
             all_luck_content = ele.find_elements(By.XPATH, '/html/body/div[1]/main/div[2]/div[1]/div[2]/section[' + str(luck_idx+1) + ']/following-sibling::*')
 
-            print(all_luck_content) # /html/body/div[1]/main/div[2]/div[1]/div[2]/p[5]
-            print(len(all_luck_content))
+            # print(all_luck_content) # /html/body/div[1]/main/div[2]/div[1]/div[2]/p[5]
+            # print(len(all_luck_content))
 
             # get the luck content of each type of fortune
             luck_content = ''
             for each_block in all_luck_content:
 
-                print(f'each_block={each_block.tag_name}\n')
+                # print(f'each_block={each_block.tag_name}\n')
                 # there are no fixed number of following p tags
                 if each_block.tag_name == 'p':
 
@@ -146,7 +146,7 @@ def fortune_crawler(zodiac_value, when_value):
                         break # break the for-loop
                     else:
                         luck_content += each_block.text + '\n\n'
-                        print(f'luck_content={luck_content}\n')
+                        # print(f'luck_content={luck_content}\n')
 
                 # if the div tag first occurred means it reaches the end of the content under this fortune type
                 # elif each_block.tag_name == 'div':
