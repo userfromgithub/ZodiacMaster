@@ -2,7 +2,7 @@
 Zodiac Master provides real-time horoscope through telegram.
 
 ## Introduction to this project
-Zodiac Master robot scrape horoscope data based on the request from users.
+Zodiac Master robot scrapes horoscope data based on the request from users.
 There are different types of categories and options for user to choose.
 All functions are provided in the form of buttons.
 
